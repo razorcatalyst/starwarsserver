@@ -1,10 +1,9 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
-const Movie = require('./Movie');
+const People = require('./People');
 //const path = require('path'); //---heroku---
 const cors = require('cors');
-const apikey = '385e80';
 
 const port = process.env.PORT || 2000;
 
@@ -18,27 +17,28 @@ app.use(function(req, res, next) {
   next();
 });
 
-//localhost:5000/getmovie?title=MovieTitle
-app.get('/getmovie', (req, res) => {
-  const title = req.query.title;
-  const querystr = `http://www.omdbapi.com/?t=${title}&apikey=${apikey}`;
+//localhost:5000/getpeople?name=Name
+app.get('/getpeople', (req, res) => {
+  const name = req.query.name;
+  const querystr = `https://swapi.co/api/people/?search=${name}`;
 
   axios
     .get(querystr)
     .then(response => {
-      const movie = new Movie({
-        title: response.data.Title,
-        year: response.data.Year,
-        genre: response.data.Genre,
-        actors: response.data.Actors,
-        plot: response.data.Plot,
-        poster: response.data.Poster
+      const people = new People({
+        name: response.data.results[0].name,
+        height: response.data.results[0].height,
+        mass: response.data.results[0].mass,
+        gender: response.data.results[0].gender,
+        films: response.data.results[0].films,
+        species: response.data.results[0].species,
+        // image:
       });
-      if (!movie.title) {
+      if (!people.name) {
         res.status(200).json('Not found');
         return;
       }
-      movie
+      people
         .save()
         .then(response => {
           res.status(200).json(response);
@@ -52,9 +52,9 @@ app.get('/getmovie', (req, res) => {
     });
 });
 
-//localhost:5000/getallmovies
-app.get('/getallmovies', (req, res) => {
-  Movie.find({})
+//localhost:5000/getallpeople
+app.get('/getallpeople', (req, res) => {
+  People.find({})
     .then(response => {
       res.status(200).send(response);
     })
@@ -64,8 +64,8 @@ app.get('/getallmovies', (req, res) => {
 });
 
 //localhost:5000/deletemovie?title=MovieTitle
-app.get('/deletemovie', (req, res) => {
-  Movie.deleteMany({ title: req.query.title })
+app.get('/deletepeople', (req, res) => {
+  People.deleteMany({ name: req.query.name })
     .then(response => {
       res.status(200).json(response);
     })
