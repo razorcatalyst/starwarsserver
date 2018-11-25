@@ -20,6 +20,7 @@ const schema = mongoose.Schema({
   gender: { type: String },
   films: { type: String },
   species: { type: String },
+  image: { type: String }
 });
 
 const People = mongoose.model('People', schema, 'peopleCollection');
