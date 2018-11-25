@@ -27,8 +27,6 @@ app.use(function(req, res, next) {
 app.get('/getpeople', (req, res) => {
   const name = req.query.search;
 
-  console.log(req.query.search);
-
   const querystr = `https://swapi.co/api/people/?search=${name}`;
   var imageUrl = '';
 
