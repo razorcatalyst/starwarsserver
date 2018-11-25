@@ -7,7 +7,7 @@ const People = require('./People');
 const cors = require('cors');
 const https = require ('https');
 var casting = require('casting');
-let subscriptionKey = 'f60be38757e04d34a166794bfaa1e3e6';
+let subscriptionKey = '00d4c6d20695461aa94f7f442a1d3b57';
 let host = 'api.cognitive.microsoft.com';
 let path = '/bing/v7.0/images/search';
 
