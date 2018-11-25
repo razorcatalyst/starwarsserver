@@ -106,9 +106,9 @@ app.get('/getallpeople', (req, res) => {
     });
 });
 
-//localhost:5000/deletemovie?title=MovieTitle
+//localhost:5000/deletepeople?search=PeopleName
 app.get('/deletepeople', (req, res) => {
-  People.deleteMany({ name: req.query.name })
+  People.deleteMany({ name: req.query.search })
     .then(response => {
       res.status(200).json(response);
     })
