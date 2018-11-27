@@ -18,8 +18,6 @@ const schema = mongoose.Schema({
   height: { type: String },
   mass: { type: String },
   gender: { type: String },
-  films: { type: String },
-  species: { type: String },
   image: { type: String }
 });
 
