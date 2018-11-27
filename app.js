@@ -23,9 +23,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-//localhost:3000/getpeople?search=Name
+//localhost:3000/getcharacter?search=Name
 
-app.get('/getpeople', (req, res) => {
+app.get('/getcharacter', (req, res) => {
   const name = req.query.search;
 
   const querystr = `https://swapi.co/api/people/?search=${name}`;
@@ -98,7 +98,7 @@ app.get('/getpeople', (req, res) => {
   });
 
 //localhost:3000/getallpeople
-app.get('/getallpeople', (req, res) => {
+app.get('/getallcharacters', (req, res) => {
   People.find({})
     .then(response => {
       res.status(200).send(response);
@@ -109,7 +109,7 @@ app.get('/getallpeople', (req, res) => {
 });
 
 //localhost:3000/deletepeople?search=PeopleName
-app.get('/deletepeople', (req, res) => {
+app.get('/deletecharacter', (req, res) => {
   People.deleteMany({ name: req.query.search })
     .then(response => {
       res.status(200).json(response);
