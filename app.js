@@ -61,7 +61,7 @@ app.get('/getcharacter', (req, res) => {
         //console.log(resultsArray[0].value[0].webSearchUrl);
         imageUrl = resultsArray[0].value[0].thumbnailUrl;
         //imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
-        console.log(imageUrl);
+        //console.log(imageUrl);
     });
   };
 
@@ -81,14 +81,15 @@ app.get('/getcharacter', (req, res) => {
         res.status(200).json('Not found');
         return;
       }
-      people
-        .save()
-        .then(response => {
-          res.status(200).json(response);
-        })
-        .catch(error => {
-          res.status(400).json(error);
-        });
+      console.log(people);
+      // people
+      //   .save()
+      //   .then(response => {
+      //     res.status(200).json(response);
+      //   })
+      //   .catch(error => {
+      //     res.status(400).json(error);
+      //   });
     })
     .catch(error => {
       res.status(400).json(error);
