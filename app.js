@@ -29,8 +29,7 @@ app.get('/getcharacter', (req, res) => {
   const name = req.query.search;
 
   const querystr = `https://swapi.co/api/people/?search=${name}`;
-  var imageUrl = '';
-  
+  let imageUrl = '';
 
   //f60be38757e04d34a166794bfaa1e3e6 API KEY BING
   let bing_image_search = function (search) {
@@ -61,9 +60,9 @@ app.get('/getcharacter', (req, res) => {
     response.on('end', function () {  
         let resultsArray = [JSON.parse(body)];
         //console.log(resultsArray[0].value[0].webSearchUrl);
-        imageUrl = resultsArray[0].value[0].webSearchUrl;
+        //imageUrl = resultsArray[0].value[0].thumbnailUrl;
+        imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
         //console.log(imageUrl);
-        //imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
     });
   };
 
