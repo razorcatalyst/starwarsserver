@@ -47,7 +47,6 @@ app.get('/getcharacter', (req, res) => {
     req.end();
   }
 
-
   // Set up response_handler identified by the parameter of the request initialized previously.
   let response_handler = function (response) {
     let body = '';
@@ -60,9 +59,9 @@ app.get('/getcharacter', (req, res) => {
     response.on('end', function () {  
         let resultsArray = [JSON.parse(body)];
         //console.log(resultsArray[0].value[0].webSearchUrl);
-        //imageUrl = resultsArray[0].value[0].thumbnailUrl;
-        imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
-        //console.log(imageUrl);
+        imageUrl = resultsArray[0].value[0].thumbnailUrl;
+        //imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
+        console.log(imageUrl);
     });
   };
 
