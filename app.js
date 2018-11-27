@@ -7,7 +7,7 @@ const People = require('./People');
 const cors = require('cors');
 const https = require ('https');
 var casting = require('casting');
-let subscriptionKey = 'key';
+let subscriptionKey = '';
 let host = 'api.cognitive.microsoft.com';
 let path = '/bing/v7.0/images/search';
 
@@ -23,13 +23,14 @@ app.use(function(req, res, next) {
   next();
 });
 
-//localhost:5000/getpeople?name=Name
+//localhost:3000/getpeople?search=Name
 app.get('/getpeople', (req, res) => {
   const name = req.query.search;
 
   const querystr = `https://swapi.co/api/people/?search=${name}`;
   var imageUrl = '';
 
+  //f60be38757e04d34a166794bfaa1e3e6 API KEY BING
   let bing_image_search = function (search) {
     console.log('Search: ' + name);
     let request_params = {
@@ -94,7 +95,7 @@ app.get('/getpeople', (req, res) => {
     });
   });
 
-//localhost:5000/getallpeople
+//localhost:3000/getallpeople
 app.get('/getallpeople', (req, res) => {
   People.find({})
     .then(response => {
@@ -105,7 +106,7 @@ app.get('/getallpeople', (req, res) => {
     });
 });
 
-//localhost:5000/deletepeople?search=PeopleName
+//localhost:3000/deletepeople?search=PeopleName
 app.get('/deletepeople', (req, res) => {
   People.deleteMany({ name: req.query.search })
     .then(response => {
