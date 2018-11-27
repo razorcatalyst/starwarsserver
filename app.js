@@ -82,14 +82,14 @@ app.get('/getcharacter', (req, res) => {
         return;
       }
       console.log(people);
-      // people
-      //   .save()
-      //   .then(response => {
-      //     res.status(200).json(response);
-      //   })
-      //   .catch(error => {
-      //     res.status(400).json(error);
-      //   });
+      people
+        .save()
+        .then(response => {
+          res.status(200).json(response);
+        })
+        .catch(error => {
+          res.status(400).json(error);
+        });
     })
     .catch(error => {
       res.status(400).json(error);
