@@ -73,8 +73,6 @@ app.get('/getpeople', (req, res) => {
         height: response.data.results[0].height,
         mass: response.data.results[0].mass,
         gender: response.data.results[0].gender,
-        films: response.data.results[0].films,
-        species: response.data.results[0].species,
         image: imageUrl
       });
       if (!people.name) {
