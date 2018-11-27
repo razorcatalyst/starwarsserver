@@ -24,11 +24,13 @@ app.use(function(req, res, next) {
 });
 
 //localhost:3000/getpeople?search=Name
+
 app.get('/getpeople', (req, res) => {
   const name = req.query.search;
 
   const querystr = `https://swapi.co/api/people/?search=${name}`;
   var imageUrl = '';
+  
 
   //f60be38757e04d34a166794bfaa1e3e6 API KEY BING
   let bing_image_search = function (search) {
@@ -46,20 +48,22 @@ app.get('/getpeople', (req, res) => {
     req.end();
   }
 
+
   // Set up response_handler identified by the parameter of the request initialized previously.
   let response_handler = function (response) {
     let body = '';
+
     response.on('data', function (d) {
         body += d;
     });
 
     // On return of the response, this function parses and logs results to the console.
     response.on('end', function () {  
-        const resultsArray = [JSON.parse(body)];
-        imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
-    });
-    response.on('error', function (e) {
-        console.log('Error: ' + e.message);  // On the event of an error, log the message to the console.
+        let resultsArray = [JSON.parse(body)];
+        //console.log(resultsArray[0].value[0].webSearchUrl);
+        imageUrl = resultsArray[0].value[0].webSearchUrl;
+        //console.log(imageUrl);
+        //imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
     });
   };
 
