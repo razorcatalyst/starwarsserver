@@ -24,6 +24,7 @@ app.use(function(req, res, next) {
 });
 
 //localhost:3000/getcharacter?search=Name
+//https://starwarsclient-assignment.herokuapp.com/getcharacter?search=Name
 
 app.get('/getcharacter', (req, res) => {
   const name = req.query.search;
@@ -94,6 +95,8 @@ app.get('/getcharacter', (req, res) => {
 });
 
 //localhost:3000/getallcharacters
+//https://starwarsclient-assignment.herokuapp.com/getallcharacters
+
 app.get('/getallcharacters', (req, res) => {
   People.find({})
     .then(response => {
@@ -104,7 +107,9 @@ app.get('/getallcharacters', (req, res) => {
     });
 });
 
-//localhost:3000/deletecharacter?search=PeopleName
+//localhost:3000/deletecharacter?search=Name
+//https://starwarsclient-assignment.herokuapp.com/deletecharacter?search=Name
+
 app.get('/deletecharacter', (req, res) => {
   People.deleteMany({ name: req.query.search })
     .then(response => {
