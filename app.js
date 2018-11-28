@@ -58,8 +58,8 @@ app.get('/getcharacter', (req, res) => {
     // On return of the response, this function parses and logs results to the console.
     response.on('end', function() {
       //let resultsArray = [JSON.parse(body)];
-      let resultsArray = JSON.parse(body);
-      imageUrl = resultsArray.value[0].thumbnailUrl;
+      let resultsArray = [JSON.parse(body)];
+      imageUrl = resultsArray[0].value[0].thumbnailUrl;
       //imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
       //console.log(imageUrl);
     });
