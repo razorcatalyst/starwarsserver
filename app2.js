@@ -57,42 +57,43 @@ app.get('/getcharacter', (req, res) => {
 
     // On return of the response, this function parses and logs results to the console.
     response.on('end', function() {
-      //let resultsArray = [JSON.parse(body)];
-      let resultsArray = JSON.parse(body);
-      imageUrl = resultsArray.value[0].thumbnailUrl;
+      let resultsArray = [JSON.parse(body)];
+      //console.log(resultsArray[0].value[0].webSearchUrl);
+      imageUrl = resultsArray[0].value[0].thumbnailUrl;
       //imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
       //console.log(imageUrl);
     });
-    axios
-      .get(querystr)
-      .then(response => {
-        const people = new People({
-          name: response.data.results[0].name,
-          height: response.data.results[0].height,
-          mass: response.data.results[0].mass,
-          gender: response.data.results[0].gender,
-          image: imageUrl
-        });
-        if (!people.name) {
-          res.status(200).json('Not found');
-          return;
-        }
-        console.log('from axios:', people);
-        people
-          .save()
-          .then(response => {
-            res.status(200).json(response);
-          })
-          .catch(error => {
-            res.status(400).json(error);
-          });
-      })
-      .catch(error => {
-        res.status(400).json(error);
-      });
   };
 
   bing_image_search(name);
+
+  axios
+    .get(querystr)
+    .then(response => {
+      const people = new People({
+        name: response.data.results[0].name,
+        height: response.data.results[0].height,
+        mass: response.data.results[0].mass,
+        gender: response.data.results[0].gender,
+        image: imageUrl
+      });
+      if (!people.name) {
+        res.status(200).json('Not found');
+        return;
+      }
+      console.log('from axios:', people);
+      people
+        .save()
+        .then(response => {
+          res.status(200).json(response);
+        })
+        .catch(error => {
+          res.status(400).json(error);
+        });
+    })
+    .catch(error => {
+      res.status(400).json(error);
+    });
 });
 
 //localhost:3000/getallcharacters
@@ -118,5 +119,5 @@ app.get('/deletecharacter', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`server listening on port ${port}`);
 });
