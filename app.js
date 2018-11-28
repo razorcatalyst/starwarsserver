@@ -63,8 +63,34 @@ app.get('/getcharacter', (req, res) => {
         //imageUrl = casting.cast(String, resultsArray[0].value[0].thumbnailUrl);
         //console.log(imageUrl);
     });
+    axios
+    .get(querystr)
+    .then(response => {
+      const people = new People({
+        name: response.data.results[0].name,
+        height: response.data.results[0].height,
+        mass: response.data.results[0].mass,
+        gender: response.data.results[0].gender,
+        image: imageUrl
+      });
+      if (!people.name) {
+        res.status(200).json('Not found');
+        return;
+      }
+      console.log(people);
+      people
+        .save()
+        .then(response => {
+          res.status(200).json(response);
+        })
+        .catch(error => {
+          res.status(400).json(error);
+        });
+    })
+    .catch(error => {
+      res.status(400).json(error);
+    });
   };
-
   bing_image_search(name);
 
   axios
