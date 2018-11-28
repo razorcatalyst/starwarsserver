@@ -89,6 +89,7 @@ app.get('/getcharacter', (req, res) => {
     .catch(error => {
       res.status(400).json(error);
     });
+  }
   bing_image_search(name);
 });
 
